@@ -58,19 +58,9 @@ python context_agent.py
 python main.py
 
 **Project Structure**
-proactive-sentinel/
-├── config.py           # Shared configuration (Retry logic, Models)
-├── tools.py            # Shared tools (Fitbit, Safety, Weather, News)
-├── main.py             # Simulation Runner
-├── requirements.txt    # Dependencies
-├── supervisor_agent.py  # Agent A (Client/Hub)
-├── sub_agents/
-     └──data_fusion_agent.py # Agent B (Server)
-     └──resource_agent.py    # Agent C (Server)
-     └── wellbeing_advisor_agent.py # Agent D (Service)
-     └──context_agent.py    # Agent E (Service)
-└── tests/
-    └── test_sentinel.py # Pytest suite
+
+<img width="522" height="254" alt="Screenshot 2025-11-27 at 11 26 55 PM" src="https://github.com/user-attachments/assets/1b40aac8-6cb4-45d7-aea8-0e0af975e01e" />
+
 
 ### If I had more time, this is what I'd do
 
