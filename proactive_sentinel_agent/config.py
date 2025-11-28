@@ -5,7 +5,7 @@ from google.genai import types
 # In a real deployment, load these from environment variables
 # --- GLOBAL CONFIGURATION ---
 # Load API Key from environment variable
-API_KEY = os.getenv("GOOGLE_API_KEY")
+API_KEY = "my-key"
 
 # Updated Model Definition
 MODEL_NAME = "gemini-2.5-flash-lite"
