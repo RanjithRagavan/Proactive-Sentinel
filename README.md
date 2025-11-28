@@ -38,6 +38,35 @@ Why This Matters Proactive Sentinel demonstrates that AI agents can be more than
 ### Demo -- Show your solution 
 
 ### The Build -- How you created it, what tools or technologies you used.
+I built Proactive Sentinel using a modular, "Hub-and-Spoke" architecture to separate concerns between safety, data analysis, and resource retrieval. The system was developed using the Google Agent Development Kit (ADK) in Python, leveraging its native support for hierarchical agent composition.
+
+
+**Framework:** Google ADK (Agent Development Kit) for agent orchestration and state management.
+
+**Models:** I utilized a dual-model strategy to balance reasoning depth with latency/cost.
+
+**Gemini 2.5 Pro:** Used for the Supervisor Agent to handle complex reasoning, safety adjudication, and empathetic dialogue generation.
+
+**gemini-2.5-flash-lite:** Used for the specialized sub-agents (Data Fusion, Resource Locator, Wellbeing Advisor) to ensure fast, efficient processing of specific tasks.
+
+**Tools & Technologies**
+
+**Hierarchical Agents (Agent-as-a-Tool):** I used the ADK's AgentTool wrapper to expose specialized agents (like the Data Fusion Engine) as callable tools to the Supervisor. This allows the Supervisor to delegate tasks without losing control of the conversation flow.
+
+**Deterministic Guardrails:** To ensure safety, I implemented a strict escalate_to_human tool. The Supervisor's system instructions are hard-coded to prioritize this tool immediately upon detecting crisis keywords, overriding any generative response.
+
+**Privacy Pipeline (The Archivist):** I built a custom ETL pipeline for long-term memory. Before any session data is summarized or stored, it passes through a regex-based PII scrubber to redact names, emails, and phone numbers, ensuring that the persistent memory bank remains anonymous.
+
+**Mock Data Integration:** Custom Python tools were created to simulate APIs for Fitbit (biometrics), Screen Time (digital habits), and Weather/News services. These return structured JSON data that the agents parse to calculate a "Wellness Score".
+
+**Observability:** The system uses Python's logging library to create a rigorous audit trail. Every tool call, safety escalation, and memory storage event is logged, providing transparency into the agent's decision-making process without exposing private user dialogue.
+
+**Key Implementation Details**
+
+**Agent2Agent (A2A) Pattern:** The architecture uses RemoteA2aAgent to connect the Supervisor to the Context Awareness and Data Fusion agents. This simulates a distributed system where sensitive data processing occurs in separate, secure environments.
+
+**Retry Logic:** I implemented HttpRetryOptions across all model definitions to handle transient API errors and ensure the resilience of the safety-critical system.
+
 **Setup**
 
 **Install dependencies:**
@@ -60,6 +89,20 @@ python main.py
 **Project Structure**
 
 <img width="522" height="254" alt="Screenshot 2025-11-27 at 11 26 55 PM" src="https://github.com/user-attachments/assets/1b40aac8-6cb4-45d7-aea8-0e0af975e01e" />
+
+proactive-sentinel/
+├── config.py           # Shared configuration (Retry logic, Models)
+├── tools.py            # Shared tools (Fitbit, Safety, Weather, News)
+├── main.py             # Simulation Runner
+├── requirements.txt    # Dependencies
+├── supervisor_agent.py  # Agent A (Client/Hub)
+├── sub_agents/
+     └──data_fusion_agent.py # Agent B (Server)
+     └──resource_agent.py    # Agent C (Server)
+     └── wellbeing_advisor_agent.py # Agent D (Service)
+     └──context_agent.py    # Agent E (Service)
+└── tests/
+    └── test_sentinel.py # Pytest suite
 
 
 ### If I had more time, this is what I'd do

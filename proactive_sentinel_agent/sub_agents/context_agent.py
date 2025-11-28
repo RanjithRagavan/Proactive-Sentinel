@@ -1,8 +1,8 @@
 from google.adk.agents import LlmAgent
-from google.adk.models.google_llm import Gemini
 from google.adk.a2a.utils.agent_to_a2a import to_a2a
 import config
 import tools
+from config import Gemini
 
 agent = LlmAgent(
     name="ContextAwarenessAgent",

@@ -21,6 +21,9 @@ async def run_simulation():
 
     session_id = "sim_session_001"
     user_id = "user_123"
+    
+    # Create session
+    await session_service.create_session(session_id=session_id, app_name="sentinel_app", user_id=user_id)
 
     # 1. User Input: Contextual Stress
     print("\n--- Turn 1: User expresses stress due to environment ---")

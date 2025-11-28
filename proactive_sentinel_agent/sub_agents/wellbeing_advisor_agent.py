@@ -1,9 +1,10 @@
 from google.adk.agents import LlmAgent
-from google.adk.models.google_llm import Gemini
 from google.adk.a2a.utils.agent_to_a2a import to_a2a
 from google.adk.agents.remote_a2a_agent import RemoteA2aAgent, AGENT_CARD_WELL_KNOWN_PATH
+from google.adk.tools import AgentTool
 import config
 import tools
+from config import Gemini
 
 # Connect to Data Fusion (Internal State)
 data_fusion_remote = RemoteA2aAgent(
@@ -22,7 +23,7 @@ agent = LlmAgent(
     2. If risks are found, formulate a gentle, supportive message.
     3. Use `send_user_message` to send advice.
     """,
-    tools=[data_fusion_remote, tools.send_user_message]
+    tools=[AgentTool(agent=data_fusion_remote), tools.send_user_message]
 )
 
 app = to_a2a(agent, port=8003)

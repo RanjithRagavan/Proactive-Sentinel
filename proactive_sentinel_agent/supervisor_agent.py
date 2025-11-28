@@ -1,8 +1,9 @@
 from google.adk.agents import LlmAgent
-from google.adk.models.google_llm import Gemini
 from google.adk.agents.remote_a2a_agent import RemoteA2aAgent, AGENT_CARD_WELL_KNOWN_PATH
+from google.adk.tools import AgentTool
 import config
 import tools
+from config import Gemini
 
 # Connect to Remote Agents via A2A
 data_fusion_remote = RemoteA2aAgent(
@@ -43,10 +44,10 @@ supervisor = LlmAgent(
     4. HELP: If user asks for resources, use `ResourceLocator`.
     """,
     tools=[
-        data_fusion_remote,
-        resource_remote,
-        wellbeing_advisor_remote,
-        context_awareness_remote,
+        AgentTool(agent=data_fusion_remote),
+        AgentTool(agent=resource_remote),
+        AgentTool(agent=wellbeing_advisor_remote),
+        AgentTool(agent=context_awareness_remote),
         tools.escalate_to_human
     ]
 )
