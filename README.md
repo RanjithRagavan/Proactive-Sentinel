@@ -38,6 +38,39 @@ Why This Matters Proactive Sentinel demonstrates that AI agents can be more than
 ### Demo -- Show your solution 
 
 ### The Build -- How you created it, what tools or technologies you used.
+**Setup**
+
+**Install dependencies:**
+
+pip install -r requirements.txt
+
+
+**Run the agent servers in separate terminals:**
+
+python data_fusion_agent.py
+python resource_agent.py
+python wellbeing_advisor_agent.py
+python context_agent.py
+
+
+**Run the main simulation:**
+
+python main.py
+
+**Project Structure**
+proactive-sentinel/
+├── config.py           # Shared configuration (Retry logic, Models)
+├── tools.py            # Shared tools (Fitbit, Safety, Weather, News)
+├── main.py             # Simulation Runner
+├── requirements.txt    # Dependencies
+├── supervisor_agent.py  # Agent A (Client/Hub)
+├── sub_agents/
+     └──data_fusion_agent.py # Agent B (Server)
+     └──resource_agent.py    # Agent C (Server)
+     └── wellbeing_advisor_agent.py # Agent D (Service)
+     └──context_agent.py    # Agent E (Service)
+└── tests/
+    └── test_sentinel.py # Pytest suite
 
 ### If I had more time, this is what I'd do
 
