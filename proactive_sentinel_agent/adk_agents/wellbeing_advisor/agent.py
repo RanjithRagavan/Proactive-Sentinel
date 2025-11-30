@@ -1,0 +1,1 @@
+from proactive_sentinel_agent.sub_agents.wellbeing_advisor_agent import agent as root_agent

@@ -1,0 +1,1 @@
+from proactive_sentinel_agent.sub_agents.resource_agent import agent as root_agent
