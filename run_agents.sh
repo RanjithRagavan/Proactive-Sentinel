@@ -5,6 +5,7 @@ pkill -f "sub_agents/data_fusion_agent.py"
 pkill -f "sub_agents/resource_agent.py"
 pkill -f "sub_agents/wellbeing_advisor_agent.py"
 pkill -f "sub_agents/context_agent.py"
+pkill -f "sub_agents/archivist_agent.py"
 
 export PYTHONPATH=$PYTHONPATH:$(pwd)/proactive_sentinel_agent
 

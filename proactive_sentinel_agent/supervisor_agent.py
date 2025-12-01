@@ -30,6 +30,12 @@ context_awareness_remote = RemoteA2aAgent(
     agent_card=f"http://localhost:8004{AGENT_CARD_WELL_KNOWN_PATH}"
 )
 
+archivist_remote = RemoteA2aAgent(
+    name="ArchivistAgent",
+    description="Scrubs PII and archives memories.",
+    agent_card=f"http://localhost:8005{AGENT_CARD_WELL_KNOWN_PATH}"
+)
+
 # Define Supervisor
 supervisor = LlmAgent(
     name="Supervisor",
@@ -38,6 +44,7 @@ supervisor = LlmAgent(
     You are 'Proactive Sentinel'.
     
     PROTOCOL:
+    0. PRIVACY: When the user shares personal information (names, phone numbers, etc.), IMMEDIATELY call `ArchivistAgent` to scrub the PII.
     1. INITIALIZATION: If the user says "Hello" or starts the chat, IMMEDIATELY call `DataFusionAgent` to check status. If sleep is low (< 6h) and screen time is high, say: "I noticed you've been up late... Looks like a rough night. Want to vent?"
     2. SAFETY: Check for crisis signals (e.g., "I can't take this anymore"). Use `escalate_to_human` IMMEDIATELY if found.
        - AFTER calling `escalate_to_human`, you MUST say: "I hear you, and I'm concerned about your safety. I'm connecting you with immediate support resources right now. Please hang on."
@@ -51,6 +58,7 @@ supervisor = LlmAgent(
         AgentTool(agent=resource_remote),
         AgentTool(agent=wellbeing_advisor_remote),
         AgentTool(agent=context_awareness_remote),
+        AgentTool(agent=archivist_remote),
         tools.escalate_to_human
     ]
 )

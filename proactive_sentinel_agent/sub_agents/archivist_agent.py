@@ -14,14 +14,12 @@ def scrub_pii(text: str) -> str:
     logger.info(f"Scrubbing PII from: {text}")
     
     # Redact Phone Numbers (Simple Regex)
-    phone_pattern = r'\b(\d{3}[-.]?\d{3}[-.]?\d{4}|\d{3}[-.]?\d{4})\b'
+    # Redact Phone Numbers (Simple Regex: 10 digits, 7 digits, or just 6+ digits for demo)
+    phone_pattern = r'\b(\d{3}[-.]?\d{3}[-.]?\d{4}|\d{3}[-.]?\d{4}|\d{6,})\b'
     text = re.sub(phone_pattern, '[REDACTED_PHONE]', text)
     
-    # Redact Potential Names (Simple Heuristic: Capitalized words that aren't start of sentence)
-    # Note: This is a very basic heuristic for the demo. Real systems use NER models.
-    # We'll just look for specific patterns or assume the LLM handles it via instructions for this demo
-    # But let's add a specific rule for "My name is X"
-    name_pattern = r'(My name is\s+)([A-Z][a-z]+)'
+    # Redact Potential Names (Simple Heuristic: "My name is X", case insensitive)
+    name_pattern = r'(?i)(my name is\s+)([a-z]+)'
     text = re.sub(name_pattern, r'\1[REDACTED_NAME]', text)
     
     return text
