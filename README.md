@@ -35,9 +35,9 @@ By using a collaborative multi-agent setup, it fuses three distinct layers of co
 
 Why This Matters Proactive Sentinel demonstrates that AI agents can be more than just text generators; they can be active partners in well-being. By combining multi-modal data fusion with a paranoid approach to privacy architecture, we can build tools that provide a genuine safety net—seeing the storm coming before the user gets wet.
 
-### Demo -- Show your solution 
+### Demo -- 
 
-### The Build -- How you created it, what tools or technologies you used.
+### The Build -- How I created it, what tools or technologies you used.
 I built Proactive Sentinel using a modular, "Hub-and-Spoke" architecture to separate concerns between safety, data analysis, and resource retrieval. The system was developed using the Google Agent Development Kit (ADK) in Python, leveraging its native support for hierarchical agent composition.
 
 
