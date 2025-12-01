@@ -16,7 +16,7 @@ By using a collaborative multi-agent setup, it fuses three distinct layers of co
 
 **How I Built It (The Architecture)** This isn't a single giant prompt; it's a "Hub-and-Spoke" system of six specialized agents working together to handle the complexity of safety, context, and privacy.
 
-<img width="2245" height="634" alt="agent_architecture" src="https://github.com/user-attachments/assets/f3d53864-0cb3-429b-9367-4f2c18df7fce" />
+<img width="3168" height="1344" alt="Gemini_Generated_Image_2me3q92me3q92me3" src="https://github.com/user-attachments/assets/c1b90807-635d-4db3-abb8-b3dd644d4ea5" />
 
 
 **Agent A:** The Supervisor (The Hub) This is the central orchestrator. It manages the conversation flow and enforces the core protocol. Its primary directive is safety: it uses a strict Human-in-the-Loop (HITL) tool as a hard guardrail. If high-risk phrases are detected, it immediately stops LLM reasoning and surfaces crisis hotlines, overriding all other behaviors.
@@ -35,9 +35,10 @@ By using a collaborative multi-agent setup, it fuses three distinct layers of co
 
 Why This Matters Proactive Sentinel demonstrates that AI agents can be more than just text generators; they can be active partners in well-being. By combining multi-modal data fusion with a paranoid approach to privacy architecture, we can build tools that provide a genuine safety net—seeing the storm coming before the user gets wet.
 
-### Demo -- Show your solution 
+### Demo -- 
+https://www.youtube.com/watch?v=KcAVmC2eAUs
 
-### The Build -- How you created it, what tools or technologies you used.
+### The Build -- How I created it, what tools or technologies you used.
 I built Proactive Sentinel using a modular, "Hub-and-Spoke" architecture to separate concerns between safety, data analysis, and resource retrieval. The system was developed using the Google Agent Development Kit (ADK) in Python, leveraging its native support for hierarchical agent composition.
 
 
@@ -67,43 +68,29 @@ I built Proactive Sentinel using a modular, "Hub-and-Spoke" architecture to sepa
 
 **Retry Logic:** I implemented HttpRetryOptions across all model definitions to handle transient API errors and ensure the resilience of the safety-critical system.
 
+**Project Structure**
+
+<img width="522" height="254" alt="Screenshot 2025-11-27 at 11 26 55 PM" src="https://github.com/user-attachments/assets/1b40aac8-6cb4-45d7-aea8-0e0af975e01e" />
+
 **Setup**
 
 **Install dependencies:**
 
 pip install -r requirements.txt
 
+**How to Run Yourself**
 
-**Run the agent servers in separate terminals:**
+**Start the Agents:**
 
-python data_fusion_agent.py
-python resource_agent.py
-python wellbeing_advisor_agent.py
-python context_agent.py
+./run_agents.sh
 
+**Start the UI:**
 
-**Run the main simulation:**
+export PYTHONPATH=$PYTHONPATH:$(pwd)/proactive_sentinel_agent
+.venv/bin/adk web proactive_sentinel_agent/adk_agents --port 8000
 
-python main.py
-
-**Project Structure**
-
-<img width="522" height="254" alt="Screenshot 2025-11-27 at 11 26 55 PM" src="https://github.com/user-attachments/assets/1b40aac8-6cb4-45d7-aea8-0e0af975e01e" />
-
-proactive-sentinel/
-├── config.py           # Shared configuration (Retry logic, Models)
-├── tools.py            # Shared tools (Fitbit, Safety, Weather, News)
-├── main.py             # Simulation Runner
-├── requirements.txt    # Dependencies
-├── supervisor_agent.py  # Agent A (Client/Hub)
-├── sub_agents/
-     └──data_fusion_agent.py # Agent B (Server)
-     └──resource_agent.py    # Agent C (Server)
-     └── wellbeing_advisor_agent.py # Agent D (Service)
-     └──context_agent.py    # Agent E (Service)
-└── tests/
-    └── test_sentinel.py # Pytest suite
-
+**Open Browser:** Go to http://localhost:8000.
 
 ### If I had more time, this is what I'd do
+If I had more time, I would replace the mock data tools with real Fitbit API integrations and implement Gemini Live for voice-based therapy sessions.
 
