@@ -1,6 +1,6 @@
 # Proactive-Sentinel
 A Privacy-First Mental Health Triage &amp; Support Agent:
-A collaborative multi-agent system that fuses physiological metrics and sentiment analysis for early intervention, strictly preserving user 
+A collaborative multi-agent system that fuses physiological metrics and sentiment analysis for early intervention, strictly preserving user privacy.
 
 ![proactive_sentinel](https://github.com/user-attachments/assets/77dead64-22cd-4cad-abc9-cd5d990f2ce6)
 
